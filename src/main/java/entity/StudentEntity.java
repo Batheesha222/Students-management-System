@@ -1,14 +1,13 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 //entity clz eke tyenne db yna ewa witri
 @Entity
 @Table(name = "student")
 public class StudentEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)// auto increment id
     private int id;
     private String name;
     private String address;
