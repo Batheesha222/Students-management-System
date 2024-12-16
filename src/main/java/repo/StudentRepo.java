@@ -13,4 +13,9 @@ public class StudentRepo {
         entity.setId((Integer) save);
         return entity;
     }
+
+    public StudentEntity search(int id, Session session) {
+        //student.merge
+        return session.get(StudentEntity.class,id);
+    }
 }

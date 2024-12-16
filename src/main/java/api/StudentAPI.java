@@ -39,5 +39,28 @@ public class StudentAPI extends HttpServlet {
             resp.getWriter().println("please sent Json format");
         }
     }
-    
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getHeader("content-type").equals("application/json")){
+            BufferedReader reader = req.getReader();
+            StudentDTO studentDTO = new Gson().fromJson(reader, StudentDTO.class);
+            StudentDTO result = studentService.updateStudent(studentDTO);
+            //write new details in response
+            if(result!=null) {
+                resp.getWriter().println(new Gson().toJson(result));
+                resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+                new Gson().toJson(studentDTO, resp.getWriter());
+                resp.getWriter().flush();
+            }else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().println("something went wrong");
+                resp.getWriter().flush();
+            }
+
+        }else {
+            resp.getWriter().println("please sent Json format");
+        }
+
+    }
 }
