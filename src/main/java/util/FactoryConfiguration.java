@@ -1,5 +1,7 @@
 package util;
 
+import entity.License;
+import entity.NationalIdentityCard;
 import entity.StudentEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +14,9 @@ public class FactoryConfiguration {
 
     private FactoryConfiguration() {
         Configuration configure = new Configuration().configure()
-                .addAnnotatedClass(StudentEntity.class);
+                .addAnnotatedClass(StudentEntity.class)
+                .addAnnotatedClass(License.class)
+                .addAnnotatedClass(NationalIdentityCard.class);
         factory = configure.buildSessionFactory();
     }
 
